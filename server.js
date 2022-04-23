@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const notes = require('./db/db.json');
+// const notes = require('./db/db.json');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -13,9 +13,12 @@ app.use(express.static('public'));
 
 // insert api routes here
 app.get('/api/notes', (req, res) => {
-  console.log('reach');
-  console.log(notes);
   res.json(notes);
+});
+
+app.post('/api/notes', (req, res) => {
+  req.body.id = notes.length.toString();
+  console.log(req.body.id);
 });
 
 app.use('/', htmlRoutes);
